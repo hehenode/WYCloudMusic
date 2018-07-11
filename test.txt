@@ -1,1 +1,17 @@
 API:https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=neteasecloudmusicapi
+
+v-bind:绑定数据   :缩写
+v-on:监听方法    @缩写  可以接受$event特殊变量来访问原生DOM
+v-model:双向绑定
+v-html:以html代码输出
+
+computed:计算属性  不能使用箭头函数，将导致this绑定错误
+watch:观察属性   不能使用箭头函数，将导致this绑定错误
+
+v-if:
+v-else:
+v-else-if:  判断是否存在DOM流中  并且会复用已有元素   使用key属性可以标识唯一不在复用
+
+v-show:是否显示在页面中  只是改变display值
+
+v-for:循环渲染

@@ -7,21 +7,25 @@
           <a href="#">发现音乐</a>
           <div class='cor'></div>
         </li>
-        <li>
-          <a href="#">我的音乐</a>
-          <div class='cor'></div>
-        </li>
-        <li>
-          <a href="#">朋友</a>
+        <li v-for="item in top_fst">
+          <a href="#">{{item}}</a>
           <div class='cor'></div>
         </li>
         <li>
           <a href="#">下载客户端</a>
           <span class='hot'></span>
         </li>
+        <li>
+          <a href="#">{{r_search}}</a>
+          <span class='hot'></span>
+        </li>
+        <li>
+          <a href="#">{{w_search}}</a>
+          <span class='hot'></span>
+        </li>
       </ul>
       <div class='search'>
-        <input type="text" placeholder="音乐/视频/电台/用户" class='search-input'>
+        <input type="text" placeholder="音乐/视频/电台/用户" v-bind:disabled="isButtonDisabled" v-model="search" class='search-input'>
       </div>
       <a class='contribute'> 
         视频投稿
@@ -93,7 +97,26 @@
 
 <script>
 export default {
-  name: "topHeader"
+  name: "topHeader",
+  data() {
+    return {
+      search: "音乐/视频/电台/用户",
+      isButtonDisabled: null,
+      w_search: "",
+      top_fst: ["我的音乐", "朋友"]
+    };
+  },
+  computed: {
+    r_search: function() {
+      return this.search.split("/")[0];
+    }
+  },
+  watch: {
+    search: function() {
+      let l = this.search.split("/");
+      this.w_search = l[l.length - 1];
+    }
+  }
 };
 </script>
 
@@ -104,7 +127,6 @@ export default {
 .top {
   display: flex;
   align-items: center;
-  justify-content: space-around;
   width: 1100px;
   height: 1.4rem;
   box-sizing: border-box;
@@ -188,6 +210,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .search-input {
@@ -210,6 +233,7 @@ export default {
   font-size: 0.24rem;
   color: #ccc;
   padding-left: 22px;
+  margin-left: 12px;
   box-sizing: border-box;
 }
 
@@ -222,6 +246,7 @@ export default {
   align-items: center;
   position: relative;
   height: 50px;
+  margin-left: 20px;
 }
 
 .user:hover .user-action {
@@ -357,9 +382,11 @@ export default {
 
 .m-subnav ul {
   display: flex;
+  width: 1100px;
   height: 34px;
-  justify-content: center;
-  margin-left: -14px;
+  margin: 0 auto;
+  padding-left: 180px;
+  box-sizing: border-box;
 }
 
 .m-subnav ul li {

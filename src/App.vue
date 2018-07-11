@@ -1,15 +1,19 @@
 <template>
-  <div id="app">
+  <div>
     <top-header></top-header>
+    <popup></popup>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import topHeader from "./components/header/head";
+import popup from "./components/popup/popup";
 export default {
   name: "App",
   components: {
-    topHeader
+    topHeader,
+    popup
   }
 };
 </script>
