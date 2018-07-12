@@ -1,28 +1,28 @@
 <template>
-  <div>歌曲:{{name}}</div>
+  <div>歌曲:{{current_music.name}}</div>
 </template>
 
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "musicDetail",
-  data() {
-    return {
-      name: ""
-    };
+  computed: {
+    ...mapState(["current_music"])
   },
-  created() {
-    console.log(this.$route);
-    this.name = this.$route.params.name;
+  methods: {
+    ...mapMutations(["UPADTE_CURRENT_MUSIC"])
   },
-  // watch: {
-  //   $route(to, from) {
-  //     this.name = to.params.name;
-  //   }
-  // },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.UPADTE_CURRENT_MUSIC({ name: to.params.name });
+    });
+  },
   beforeRouteUpdate(to, from, next) {
-    this.name = to.params.name;
-    console.log(next);
+    this.UPADTE_CURRENT_MUSIC({ name: to.params.name });
+    next();
+  },
+  beforeRouteLeave(to, from, next) {
     next();
   }
 };

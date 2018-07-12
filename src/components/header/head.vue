@@ -4,28 +4,28 @@
       <h1 class='logo'></h1>
       <ul class='m-nav'>
         <li class='fst'>
-          <a href="#">发现音乐</a>
+          <router-link to="/findMusic">发现音乐</router-link>
           <div class='cor'></div>
         </li>
         <li v-for="item in top_fst">
-          <a href="#">{{item}}</a>
+          <router-link to="/findMusic">{{item}}</router-link>
           <div class='cor'></div>
         </li>
         <li>
-          <a href="#">下载客户端</a>
+          <router-link to="/detail/呵呵">下载客户端</router-link>
           <span class='hot'></span>
         </li>
         <li>
-          <a href="#">{{r_search}}</a>
-          <span class='hot'></span>
+          <router-link :to="{path:`/detail/${get_idx_todos(0)}`}">{{get_idx_todos(0)}}</router-link>
+          <span class='cor'></span>
         </li>
         <li>
-          <a href="#">{{w_search}}</a>
-          <span class='hot'></span>
+          <router-link :to="{path:`/detail/${get_idx_todos(1)}`}">{{get_idx_todos(1)}}</router-link>
+          <span class='cor'></span>
         </li>
       </ul>
       <div class='search'>
-        <input type="text" placeholder="音乐/视频/电台/用户" v-bind:disabled="isButtonDisabled" v-model="search" class='search-input'>
+        <input type="text" placeholder="音乐/视频/电台/用户" v-bind:disabled="isButtonDisabled" v-model="todos" class='search-input'>
       </div>
       <a class='contribute'> 
         视频投稿
@@ -96,26 +96,29 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   name: "topHeader",
   data() {
     return {
-      search: "音乐/视频/电台/用户",
       isButtonDisabled: null,
-      w_search: "",
       top_fst: ["我的音乐", "朋友"]
     };
   },
   computed: {
-    r_search: function() {
-      return this.search.split("/")[0];
-    }
+    todos: {
+      get() {
+        return this.$store.state.todos;
+      },
+      set(value) {
+        this.async_set_todos(value);
+      }
+    },
+    ...mapGetters(["get_idx_todos"])
   },
-  watch: {
-    search: function() {
-      let l = this.search.split("/");
-      this.w_search = l[l.length - 1];
-    }
+  methods: {
+    ...mapMutations(["SET_TODOS"]),
+    ...mapActions(["async_set_todos"])
   }
 };
 </script>

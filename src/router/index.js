@@ -22,7 +22,6 @@ export default new Router({
                 path: '/findMusic',
                 component: findMusic,
                 props: (route) => {
-                    console.log(route)
                     query: route.query.q
                 }
             },

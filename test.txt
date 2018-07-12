@@ -15,3 +15,8 @@ v-else-if:  判断是否存在DOM流中  并且会复用已有元素   使用key
 v-show:是否显示在页面中  只是改变display值
 
 v-for:循环渲染
+
+
+VUEX 
+使用store.commit触发mutations 
+使用store.dispatch触发actions  actions提交mutations
